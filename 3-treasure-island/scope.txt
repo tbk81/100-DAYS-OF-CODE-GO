@@ -1,0 +1,4 @@
+Write a choose your own adventure game with 3 rooms.
+First room choose between left and right. One kills you and ends the game.
+Second room you come to a river and choose to wait for a boat or swim. Swim you die
+Third room you have to choose between 3 doors and only one has the treasure, the others make you die.
