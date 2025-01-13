@@ -17,6 +17,5 @@ func main() {
 	fmt.Scanln(&people)
 
 	total = ((bill * (tip / 100)) + bill) / people
-	// trunc := math.Round(total)
 	fmt.Printf("bill: %v\ntip: %v\npeople: %v\ntotal per guest: %.2f\n", bill, tip, people, total)
 }
