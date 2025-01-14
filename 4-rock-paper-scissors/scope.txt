@@ -1,0 +1,4 @@
+Rock paper scissors game
+Player chooses between 0-rock, 1-paper, 2-scissors
+The program randomly chooses 0-rock, 1-paper, 2-scissors
+The program cmapres the values and determines the winner
