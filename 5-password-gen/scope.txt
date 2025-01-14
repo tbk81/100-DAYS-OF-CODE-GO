@@ -1,0 +1,3 @@
+Create a password generator
+Ask for how many letters, symbols and numbers
+Generate each input randomly and join them randomly
