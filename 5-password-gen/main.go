@@ -9,9 +9,9 @@ func numgen(n int) []int {
 	return rand.Perm(n)
 }
 
-func symgen(n int) []string {
-	return Syms
-}
+// func symgen(n int) []string {
+// 	return Syms
+// }
 
 func main() {
 	var nums, symbols, letters int
@@ -23,6 +23,9 @@ func main() {
 	fmt.Scanln(&symbols)
 	fmt.Println("How many letters would you like?")
 	fmt.Scanln(&letters)
+
+	// symbols := Syms(symbols)
+	// fmt.Println(symbols)
 
 	final := numgen(nums)
 	fmt.Printf("Num slice:\n%v\nLen of slice:\n%v\n", final, len(final))
