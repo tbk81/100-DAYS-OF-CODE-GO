@@ -26,9 +26,10 @@ func main() {
 	fmt.Println("How many letters would you like?")
 	fmt.Scanln(&letters)
 
-	// symbols := Syms(symbols)
+	randoSyms := symgen(symbols)
 	// fmt.Println(symbols)
 
-	final := numgen(nums)
-	fmt.Printf("Num slice:\n%v\nLen of slice:\n%v\n", final, len(final))
+	randoNums := numgen(nums)
+	fmt.Printf("Num slice:\n%v\nLen of slice:\n%v\n", randoNums, len(randoNums))
+	fmt.Printf("Num sym:\n%v\nLen of sym:\n%v\n", randoSyms, len(randoSyms))
 }
