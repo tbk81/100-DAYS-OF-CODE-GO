@@ -3,16 +3,17 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	// "github.com/tbk81/100-DAYS-OF-CODE-GO/5-password-gen/ransym"
+
+	"github.com/tbk81/100-DAYS-OF-CODE-GO/5-password-gen/ransym"
 )
 
 func numgen(n int) []int {
 	return rand.Perm(n)
 }
 
-// func symgen(n int) []string {
-// 	return Syms
-// }
+func symgen(n int) string {
+	return ransym.Syms(n)
+}
 
 func main() {
 	var nums, symbols, letters int
