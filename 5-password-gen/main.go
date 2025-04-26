@@ -3,33 +3,57 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
+	"strings"
 
-	"github.com/tbk81/100-DAYS-OF-CODE-GO/5-password-gen/ransym"
+	"github.com/tbk81/100-DAYS-OF-CODE-GO/5-password-gen/randoGen"
 )
 
-func numgen(n int) []int {
-	return rand.Perm(n)
+const symSet = "!?@#$%^&*"
+const charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+func numgen(n int) string {
+	var numStr string
+	xi := rand.Perm(n)
+	for i := range xi {
+		x := strconv.Itoa(i)
+		numStr += x
+	}
+	return numStr
 }
 
 func symgen(n int) string {
-	return ransym.Syms(n)
+	return randoGen.Rando(n, symSet)
+}
+
+func chargen(n int) string {
+	return randoGen.Rando(n, charSet)
 }
 
 func main() {
 	var nums, symbols, letters int
 	// var letters, symbols string
 
-	fmt.Println("Welcome to the GO password generator\nHow many numbers would you like?")
+	fmt.Print("Welcome to the GO password generator\nHow many numbers would you like? ")
 	fmt.Scanln(&nums)
-	fmt.Println("How many symbols would you like?")
+	fmt.Print("How many symbols would you like? ")
 	fmt.Scanln(&symbols)
-	fmt.Println("How many letters would you like?")
+	fmt.Print("How many letters would you like? ")
 	fmt.Scanln(&letters)
 
-	randoSyms := symgen(symbols)
-	// fmt.Println(symbols)
-
 	randoNums := numgen(nums)
-	fmt.Printf("Num slice:\n%v\nLen of slice:\n%v\n", randoNums, len(randoNums))
-	fmt.Printf("Num sym:\n%v\nLen of sym:\n%v\n", randoSyms, len(randoSyms))
+	randoSyms := symgen(symbols)
+	randoChars := chargen(letters)
+
+	concat := randoNums + randoSyms + randoChars
+	final := strings.Split(concat, "")
+	// func rand.Seed(seed int64)
+	// final = rand.Shuffle(len(final), func(i, j int) { a[i], a[j] = a[j], a[i] })
+
+	fmt.Printf("Nums:%v\tLen:%v\n", randoNums, len(randoNums))
+	fmt.Printf("Symbols:%v\tLen:%v\n", randoSyms, len(randoSyms))
+	fmt.Printf("Chars:%v\tLen:%v\n", randoChars, len(randoChars))
+	fmt.Printf("Concat:%v\tLen:%v\n", concat, len(concat))
+	fmt.Println(final)
+
 }
