@@ -46,14 +46,18 @@ func main() {
 	randoChars := chargen(letters)
 
 	concat := randoNums + randoSyms + randoChars
-	final := strings.Split(concat, "")
-	// func rand.Seed(seed int64)
-	// final = rand.Shuffle(len(final), func(i, j int) { a[i], a[j] = a[j], a[i] })
+	shuffleCat := strings.Split(concat, "")
+	rand.Shuffle(len(shuffleCat), func(i, j int) { shuffleCat[i], shuffleCat[j] = shuffleCat[j], shuffleCat[i] })
 
-	fmt.Printf("Nums:%v\tLen:%v\n", randoNums, len(randoNums))
-	fmt.Printf("Symbols:%v\tLen:%v\n", randoSyms, len(randoSyms))
-	fmt.Printf("Chars:%v\tLen:%v\n", randoChars, len(randoChars))
-	fmt.Printf("Concat:%v\tLen:%v\n", concat, len(concat))
-	fmt.Println(final)
+	var final string
+	for _, v := range shuffleCat {
+		final += v
+	}
+
+	// fmt.Printf("Nums:%v\tLen:%v\n", randoNums, len(randoNums))
+	// fmt.Printf("Symbols:%v\tLen:%v\n", randoSyms, len(randoSyms))
+	// fmt.Printf("Chars:%v\tLen:%v\n", randoChars, len(randoChars))
+	// fmt.Printf("Concat:%v\tLen:%v\n", concat, len(concat))
+	fmt.Println("Your password is:", final)
 
 }
