@@ -32,7 +32,6 @@ func chargen(n int) string {
 
 func main() {
 	var nums, symbols, letters int
-	// var letters, symbols string
 
 	fmt.Print("Welcome to the GO password generator\nHow many numbers would you like? ")
 	fmt.Scanln(&nums)
