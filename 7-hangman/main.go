@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -11,6 +13,17 @@ func main() {
 	var currentGuess string
 	wordToGuess := "hang"
 	lives := len(wordToGuess)
+
+	// Open the file.
+	f, _ := os.Open("/home/trevor/go-projects/100-DAYS-GO/7-hangman/hangmanWords.txt")
+	defer f.Close()
+	// Create a new Scanner for the file.
+	scanner := bufio.NewScanner(f)
+	// Loop over all lines in the file and print them.
+	for scanner.Scan() {
+		line := scanner.Text()
+		fmt.Println(line)
+	}
 
 	// Initializes a slice of _ so index can be referenced and changed
 	for range len(wordToGuess) {
@@ -26,9 +39,7 @@ func main() {
 	for {
 		fmt.Print("\nGuess a letter: ")
 		fmt.Scanln(&currentGuess)
-		// fmt.Println(strings.Contains(wordToGuess, currentGuess))
 		ind := strings.Index(wordToGuess, currentGuess)
-		// fmt.Println("Index:", ind)
 
 		if strings.Contains(wordToGuess, currentGuess) {
 			word[ind] = currentGuess
@@ -37,30 +48,17 @@ func main() {
 		}
 
 		fmt.Println("Lives:", lives)
-		for _, v := range word {
-			currentWord = strings.Join(word, v)
-			fmt.Print(currentWord)
-			// fmt.Print(v)
-		}
+		currentWord = strings.Join(word, "")
+		fmt.Println(currentWord)
 
+		// Check word and life count to end the game
 		if lives == 0 {
 			fmt.Println("\nGame Over!")
+			break
+		} else if currentWord == wordToGuess {
+			fmt.Println("\nYou Win!")
 			break
 		}
 	}
 
 }
-
-// for {
-// 	var fname, lname string
-// 	fmt.Print("Type First Name: ")
-// 	fmt.Scanln(&fname)
-// 	fmt.Print("Type Last Name: ")
-// 	fmt.Scanln(&lname)
-
-// 	fmt.Println("Your name is:", fname, lname)
-
-// 	if fname == "stop" || lname == "stop" {
-// 		break
-// 	}
-// }
