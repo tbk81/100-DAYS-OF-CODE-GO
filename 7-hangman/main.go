@@ -29,7 +29,6 @@ func main() {
 	for range len(wordToGuess) {
 		word = append(word, "_")
 	}
-	// fmt.Println(word)
 
 	// Prints the values of each index of slice createing a seemless "string"
 	for _, v := range word {
