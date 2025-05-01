@@ -23,52 +23,38 @@ func wordGenerator() string {
 	return wordList[rand.Intn(len(wordList))]
 }
 
-// func findAllIndices(word string, char rune) []int {
-// 	var indices []int
+// findAllIndices returns a slice containing all indices
+// where the specified character appears in the word
+func findAllIndices(word string, char string) []int {
+	var indices []int
+	// Start searching from the beginning
+	startIndex := 0
 
-// 	// Iterate through each character in the word
-// 	for i, c := range word {
-// 		// If the current character matches the one we're looking for
-// 		if c == char {
-// 			// Add its index to our results
-// 			indices = append(indices, i)
-// 		}
-// 	}
-// 	return indices
-// }
+	for {
+		// Find the next occurrence of the character
+		index := strings.Index(word[startIndex:], char)
 
-// // findAllIndices returns a slice containing all indices
-// // where the specified character appears in the word
-// func findAllIndices(word string, char string) []int {
-// 	var indices []int
-// 	// Start searching from the beginning
-// 	startIndex := 0
+		// If no more occurrences found, break the loop
+		if index == -1 {
+			break
+		}
 
-// 	for {
-// 		// Find the next occurrence of the character
-// 		index := strings.Index(word[startIndex:], char)
+		// Calculate the actual index in the original string
+		actualIndex := startIndex + index
+		indices = append(indices, actualIndex)
 
-// 		// If no more occurrences found, break the loop
-// 		if index == -1 {
-// 			break
-// 		}
-
-// 		// Calculate the actual index in the original string
-// 		actualIndex := startIndex + index
-// 		indices = append(indices, actualIndex)
-
-// 		// Continue searching after this occurrence
-// 		startIndex = actualIndex + 1
-// 	}
-// 	return indices
-// }
+		// Continue searching after this occurrence
+		startIndex = actualIndex + 1
+	}
+	return indices
+}
 
 func main() {
 	var word []string
 	var currentWord, currentGuess string
 	wordToGuess := wordGenerator()
 	lives := 6
-
+	// fmt.Println(wordToGuess) // Uncomment for tesing
 	// Initializes a slice of _ so index can be referenced and changed
 	for range len(wordToGuess) {
 		word = append(word, "_")
@@ -82,22 +68,15 @@ func main() {
 	for {
 		fmt.Print("\nGuess a letter: ")
 		fmt.Scanln(&currentGuess)
-		ind := strings.Index(wordToGuess, currentGuess)
 
-		if strings.Contains(wordToGuess, currentGuess) {
-			word[ind] = currentGuess
+		if strings.Contains(wordToGuess, string(currentGuess)) {
+			indices := findAllIndices(wordToGuess, currentGuess)
+			for _, c := range indices {
+				word[c] = string(currentGuess)
+			}
 		} else {
 			lives -= 1
 		}
-
-		// if strings.Contains(wordToGuess, string(currentGuess)) {
-		// 	indices := findAllIndices(wordToGuess, currentGuess)
-		// 	for _, c := range indices {
-		// 		word[c] = string(currentGuess)
-		// 	}
-		// } else {
-		// 	lives -= 1
-		// }
 
 		fmt.Println("Lives:", lives)
 		currentWord = strings.Join(word, "")
