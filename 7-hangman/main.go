@@ -50,7 +50,7 @@ func findAllIndices(word string, char string) []int {
 }
 
 func main() {
-	var word []string
+	var word, guessList []string
 	var currentWord, currentGuess string
 	wordToGuess := wordGenerator()
 	lives := 6
@@ -68,7 +68,7 @@ func main() {
 	for {
 		fmt.Print("\nGuess a letter: ")
 		fmt.Scanln(&currentGuess)
-
+		guessList = append(guessList, currentGuess)
 		if strings.Contains(wordToGuess, string(currentGuess)) {
 			indices := findAllIndices(wordToGuess, currentGuess)
 			for _, c := range indices {
@@ -78,6 +78,7 @@ func main() {
 			lives -= 1
 		}
 
+		fmt.Println(guessList)
 		fmt.Println("Lives:", lives)
 		currentWord = strings.Join(word, "")
 		fmt.Println(currentWord)
