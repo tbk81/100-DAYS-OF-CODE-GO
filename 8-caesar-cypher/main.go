@@ -20,24 +20,24 @@ func Encrypt(word string, shift int) string {
 // }
 
 func main() {
-	fmt.Println(translation(alphabet, 26))
+	// fmt.Println(translation(alphabet, 26))
 
-	// var encryptWord, usrChoice string
-	// var shiftNumber int
+	var encryptWord, usrChoice string
+	var shiftNumber int
 
-	// fmt.Println("Type 'endcode' to encrypt, tpye 'decode' to decrypt:")
-	// fmt.Scanln(&usrChoice)
-	// if usrChoice == "encode" {
-	// 	fmt.Println("Type your message:")
-	// 	fmt.Scanln(&encryptWord)
-	// 	fmt.Println("Type the shift number:")
-	// 	fmt.Scanln(&shiftNumber)
-	// 	fmt.Print("Here's your encoded result:", Encrypt(encryptWord))
-	// } else if usrChoice == "decode" {
-	// 	fmt.Println("Type your message:")
-	// 	fmt.Scanln(&encryptWord)
-	// } else {
-	// 	fmt.Printf("%v is not an option, try again\n", usrChoice)
-	// }
+	fmt.Println("Type 'endcode' to encrypt, tpye 'decode' to decrypt:")
+	fmt.Scanln(&usrChoice)
+	if usrChoice == "encode" {
+		fmt.Println("Type your message:")
+		fmt.Scanln(&encryptWord)
+		fmt.Println("Type the shift number:")
+		fmt.Scanln(&shiftNumber)
+		fmt.Print("Here's your encoded result:", Encrypt(encryptWord))
+	} else if usrChoice == "decode" {
+		fmt.Println("Type your message:")
+		fmt.Scanln(&encryptWord)
+	} else {
+		fmt.Printf("%v is not an option, try again\n", usrChoice)
+	}
 
 }
