@@ -11,7 +11,7 @@ func findAllIndices(word string) []int {
 	xs := strings.Split(word, "")
 	var xi []int
 	for _, v := range xs {
-		for x, _ := range alphabet {
+		for x := range alphabet {
 			if v == alphabet[x] {
 				xi = append(xi, x)
 			}
@@ -21,9 +21,26 @@ func findAllIndices(word string) []int {
 }
 
 func Encrypt(word string, shift int) string {
+	var e string
+	sli := findAllIndices(word)
 	shift = shift % len(alphabet)
-	// shiftSlice := slices.Concat(alphabet[shift:len(alphabet):len(alphabet)])
-	return word
+	shiftSlice := append(alphabet[shift:len(alphabet):len(alphabet)], alphabet[:shift]...)
+	for _, v := range sli {
+		e += shiftSlice[v]
+	}
+	return e
+}
+
+func Decrypt(word string, shift int) string {
+	var e string
+	num := 26 - shift
+	sli := findAllIndices(word)
+	shift = num % len(alphabet)
+	shiftSlice := append(alphabet[shift:len(alphabet):len(alphabet)], alphabet[:shift]...)
+	for _, v := range sli {
+		e += shiftSlice[v]
+	}
+	return e
 }
 
 func main() {
@@ -40,16 +57,18 @@ Loop:
 			fmt.Scanln(&encryptWord)
 			fmt.Println("Type the shift number:")
 			fmt.Scanln(&shiftNumber)
-			fmt.Print("Here's your encoded result:", Encrypt(encryptWord, shiftNumber))
+			fmt.Println("Here's your encoded result:", Encrypt(encryptWord, shiftNumber))
 		case usrChoice == "decode":
 			fmt.Println("Type your message:")
 			fmt.Scanln(&encryptWord)
+			fmt.Println("Type the shift number:")
+			fmt.Scanln(&shiftNumber)
+			fmt.Println("Here's your encoded result:", Decrypt(encryptWord, shiftNumber))
 		case usrChoice == "done":
 			fmt.Println("Exiting...")
 			break Loop
-		case usrChoice != "encode" && usrChoice != "decode":
-			fmt.Printf("%v is not an option, try again\n", usrChoice)
-			break
+			// case usrChoice != "encode" && usrChoice != "decode":
+			// 	fmt.Printf("%v is not an option, try again\n", usrChoice)
 		}
 	}
 }
