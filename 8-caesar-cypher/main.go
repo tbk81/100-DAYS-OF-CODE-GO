@@ -47,7 +47,7 @@ func main() {
 	var encryptWord, usrChoice string
 	var shiftNumber int
 
-	fmt.Println("Type 'endcode' to encrypt, tpye 'decode' to decrypt:")
+	fmt.Println("Type 'endcode' to encrypt, type 'decode' to decrypt:")
 	fmt.Scanln(&usrChoice)
 Loop:
 	for {
