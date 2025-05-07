@@ -10,19 +10,19 @@ func operandDisplay() {
 	}
 }
 
-func add(f float64, s float64) float64 {
+func add(f, s float64) float64 {
 	return f + s
 }
 
-func substract(f float64, s float64) float64 {
+func substract(f, s float64) float64 {
 	return f - s
 }
 
-func divide(f float64, s float64) float64 {
+func divide(f, s float64) float64 {
 	return f / s
 }
 
-func multiply(f float64, s float64) float64 {
+func multiply(f, s float64) float64 {
 	return f * s
 }
 
