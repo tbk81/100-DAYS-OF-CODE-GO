@@ -39,14 +39,14 @@ func main() {
 	fmt.Print("Type your second number: ")
 	fmt.Scanln(&secondNum)
 
-	switch {
-	case operand == "+":
+	switch operand {
+	case "+":
 		solution = add(firstNum, secondNum)
-	case operand == "-":
+	case "-":
 		solution = substract(firstNum, secondNum)
-	case operand == "/":
+	case "/":
 		solution = divide(firstNum, secondNum)
-	case operand == "*":
+	case "*":
 		solution = multiply(firstNum, secondNum)
 	}
 
