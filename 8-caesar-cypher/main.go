@@ -47,28 +47,30 @@ func main() {
 	var encryptWord, usrChoice string
 	var shiftNumber int
 
-	fmt.Println("Type 'endcode' to encrypt, type 'decode' to decrypt:")
-	fmt.Scanln(&usrChoice)
 Loop:
 	for {
+		fmt.Println("Type 'endcode' to encrypt, type 'decode' to decrypt, or 'done' to exit:")
+		fmt.Scanln(&usrChoice)
 		switch {
 		case usrChoice == "encode":
-			fmt.Println("Type your message:")
+			fmt.Print("Type your message: ")
 			fmt.Scanln(&encryptWord)
-			fmt.Println("Type the shift number:")
+			fmt.Print("Type the shift number: ")
 			fmt.Scanln(&shiftNumber)
 			fmt.Println("Here's your encoded result:", Encrypt(encryptWord, shiftNumber))
+			goto Loop
 		case usrChoice == "decode":
-			fmt.Println("Type your message:")
+			fmt.Print("Type your message: ")
 			fmt.Scanln(&encryptWord)
-			fmt.Println("Type the shift number:")
+			fmt.Print("Type the shift number: ")
 			fmt.Scanln(&shiftNumber)
 			fmt.Println("Here's your encoded result:", Decrypt(encryptWord, shiftNumber))
 		case usrChoice == "done":
 			fmt.Println("Exiting...")
 			break Loop
-			// case usrChoice != "encode" && usrChoice != "decode":
-			// 	fmt.Printf("%v is not an option, try again\n", usrChoice)
+		case usrChoice != "encode" && usrChoice != "decode":
+			fmt.Printf("%v is not an option, try again\n", usrChoice)
+			goto Loop
 		}
 	}
 }
