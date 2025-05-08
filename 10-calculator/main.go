@@ -26,32 +26,48 @@ func multiply(f, s float64) float64 {
 	return f * s
 }
 
+func calc(n1, n2 float64, o string) float64 {
+	var solution float64
+	switch o {
+	case "+":
+		solution = add(n1, n2)
+	case "-":
+		solution = substract(n1, n2)
+	case "/":
+		solution = divide(n1, n2)
+	case "*":
+		solution = multiply(n1, n2)
+	}
+	return solution
+}
+
 func main() {
-	var firstNum, secondNum, solution float64
+	var firstNum, secondNum float64
 	var operand, usrChoice string
 
 	fmt.Println("Welcome to the 4 function calculator")
-	fmt.Print("Type your first number: ")
-	fmt.Scanln(&firstNum)
-	operandDisplay()
-	fmt.Print("Pick your operation: ")
-	fmt.Scanln(&operand)
-	fmt.Print("Type your second number: ")
-	fmt.Scanln(&secondNum)
+Loop:
+	for {
+		fmt.Print("Type your first number: ")
+		fmt.Scanln(&firstNum)
+		operandDisplay()
+		fmt.Print("Pick your operation: ")
+		fmt.Scanln(&operand)
+		fmt.Print("Type your second number: ")
+		fmt.Scanln(&secondNum)
+		answer := calc(firstNum, secondNum, operand)
 
-	switch operand {
-	case "+":
-		solution = add(firstNum, secondNum)
-	case "-":
-		solution = substract(firstNum, secondNum)
-	case "/":
-		solution = divide(firstNum, secondNum)
-	case "*":
-		solution = multiply(firstNum, secondNum)
+		fmt.Println(firstNum, operand, secondNum, "=", answer)
+		fmt.Printf("Type 'y' to continue calculating with %v or type 'n' to start a new calculation: ", answer)
+		fmt.Scanln(&usrChoice)
+		switch usrChoice {
+		case "y":
+			goto Loop
+		case "n":
+			goto Loop
+		case "exit":
+			break Loop
+		}
 	}
-
-	fmt.Println(firstNum, operand, secondNum, "=", solution)
-	fmt.Println("Type 'y' to continue calculating or type 'n' to start a new calculation: ")
-	fmt.Scanln(&usrChoice)
 
 }
