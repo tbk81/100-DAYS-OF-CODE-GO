@@ -42,11 +42,11 @@ func calc(n1, n2 float64, o string) float64 {
 }
 
 func main() {
-	var firstNum, secondNum float64
+	var firstNum, secondNum, answer float64
 	var operand, usrChoice string
 
 	fmt.Println("Welcome to the 4 function calculator")
-Loop:
+Loop1:
 	for {
 		fmt.Print("Type your first number: ")
 		fmt.Scanln(&firstNum)
@@ -55,18 +55,38 @@ Loop:
 		fmt.Scanln(&operand)
 		fmt.Print("Type your second number: ")
 		fmt.Scanln(&secondNum)
-		answer := calc(firstNum, secondNum, operand)
+		answer = calc(firstNum, secondNum, operand)
 
 		fmt.Println(firstNum, operand, secondNum, "=", answer)
 		fmt.Printf("Type 'y' to continue calculating with %v or type 'n' to start a new calculation: ", answer)
 		fmt.Scanln(&usrChoice)
 		switch usrChoice {
 		case "y":
-			goto Loop
+		Loop2:
+			for {
+				operandDisplay()
+				fmt.Print("Pick your operation: ")
+				fmt.Scanln(&operand)
+				fmt.Print("Type your second number: ")
+				fmt.Scanln(&secondNum)
+				answer = calc(answer, secondNum, operand)
+
+				fmt.Println(firstNum, operand, secondNum, "=", answer)
+				fmt.Printf("Type 'y' to continue calculating with %v or type 'n' to start a new calculation: ", answer)
+				fmt.Scanln(&usrChoice)
+				switch usrChoice {
+				case "y":
+					goto Loop2
+				case "n":
+					goto Loop1
+				case "exit":
+					break Loop1
+				}
+			}
 		case "n":
-			goto Loop
+			goto Loop1
 		case "exit":
-			break Loop
+			break Loop1
 		}
 	}
 
