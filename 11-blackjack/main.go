@@ -1,8 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-var deck = []string{}
+// var deck = make([]string,52)
+var deck = []string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10", "10", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10", "10", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10", "10", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10", "10", "10"}
+
+func blackjack() []string {
+	return deck
+}
 
 func main() {
 	var usrChoice string
@@ -14,6 +21,7 @@ Loop:
 		switch usrChoice {
 		case "y":
 			fmt.Println("start playing game")
+			blackjack()
 		case "n":
 			break Loop
 		}
