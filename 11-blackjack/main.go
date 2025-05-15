@@ -2,28 +2,73 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/tbk81/100-DAYS-OF-CODE-GO/00-tools/clearScreen"
+	"github.com/tbk81/100-DAYS-OF-CODE-GO/00-tools/randoGen"
 )
 
-// var deck = make([]string,52)
-var deck = []string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10", "10", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10", "10", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10", "10", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "10", "10", "10"}
+var deck = []int{2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 11}
 
-func blackjack() []string {
-	return deck
+func dealHand(i int, d []int) []int {
+	return randoGen.Rando(i, d)
+}
+
+func drawCard() []int {
+	return randoGen.Rando(1, deck)
+}
+
+func score(h []int) int {
+	var t int
+	for _, v := range h {
+		t += v
+	}
+	return t
+}
+
+func checkHand(h []int) bool {
+	t := score(h)
+	if t > 21 {
+		return true
+	} else {
+		return false
+	}
 }
 
 func main() {
-	var usrChoice string
+	var playerHand, computerHand []int
+	var usrChoice, hit string
 	fmt.Println("Welcome to blackjack!")
-Loop:
+Loop1:
 	for {
 		fmt.Print("Do you want to play a game of blackjack? Type 'y' or 'n': ")
 		fmt.Scanln(&usrChoice)
 		switch usrChoice {
 		case "y":
-			fmt.Println("start playing game")
-			blackjack()
+			fmt.Println("Start playing game")
+			playerHand = dealHand(2, deck)
+			computerHand = dealHand(2, deck)
+			fmt.Printf("Your cards: %v\nComputer's first card: %v\n", playerHand, computerHand[0])
+		Loop2:
+			for {
+				fmt.Print("'h' to hit or 'p' to pass: ")
+				fmt.Scanln(&hit)
+				switch hit {
+				case "h":
+					playerHand = append(playerHand, drawCard()[0])
+					fmt.Printf("Your hand: %v\tCurrent total: %v\n", playerHand, score(playerHand))
+					fmt.Println("Computer's first card:", computerHand[0])
+					if checkHand(playerHand) {
+						fmt.Println("BUST! Computer wins")
+						break Loop2
+					}
+					//fmt.Println(checkHand(playerHand))
+				case "p":
+					clearScreen.Clear()
+					break Loop2
+				}
+			}
 		case "n":
-			break Loop
+			break Loop1
 		}
 	}
 }
