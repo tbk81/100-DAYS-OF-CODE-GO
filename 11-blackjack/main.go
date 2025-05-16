@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/tbk81/100-DAYS-OF-CODE-GO/00-tools/clearScreen"
 	"github.com/tbk81/100-DAYS-OF-CODE-GO/00-tools/randoGen"
 )
 
@@ -34,8 +35,11 @@ func checkHand(h []int) bool {
 }
 
 func playComp(h []int) []int {
-	if checkHand(h) == false && score(h) < 17 {
+	for score(h) < 17 {
 		h = append(h, drawCard()[0])
+		if h[len(h)-1] == 11 && checkHand(h) {
+			h[len(h)-1] = 1
+		}
 	}
 	return h
 }
@@ -58,6 +62,7 @@ Loop1:
 			for {
 				fmt.Print("'h' to hit or 'p' to pass: ")
 				fmt.Scanln(&hit)
+				fmt.Println("")
 				switch hit {
 				case "h":
 					playerHand = append(playerHand, drawCard()[0])
@@ -67,16 +72,28 @@ Loop1:
 					fmt.Printf("Your hand: %v\tCurrent total: %v\n", playerHand, score(playerHand))
 					fmt.Println("Computer's first card:", computerHand[0])
 					if checkHand(playerHand) {
-						fmt.Println("BUST! Computer wins")
+						fmt.Printf("BUST! Computer wins with %v\n", computerHand)
 						break Loop2
 					}
 				case "p":
-					fmt.Println(playComp(computerHand))
-					// clearScreen.Clear()
+					c := playComp(computerHand)
+					fmt.Printf("Your hand: %v\tTotal: %v\n", playerHand, score(playerHand))
+					fmt.Printf("Computer's hand: %v\tTotal: %v\n", c, score(c))
+					if score(playerHand) > score(c) || score(c) > 21 {
+						fmt.Println("You win!")
+						fmt.Println("")
+					} else if score(playerHand) == score(c) {
+						fmt.Println("It's a tie, fight to the death!")
+						fmt.Println("")
+					} else {
+						fmt.Println("Computer wins =(")
+						fmt.Println("")
+					}
 					break Loop2
 				}
 			}
 		case "n":
+			clearScreen.Clear()
 			break Loop1
 		}
 	}
