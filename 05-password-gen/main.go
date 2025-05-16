@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tbk81/100-DAYS-OF-CODE-GO/5-password-gen/randoGen"
+	"github.com/tbk81/100-DAYS-OF-CODE-GO/05-password-gen/randoGen"
 )
 
 const symSet = "!?@#$%^&*"

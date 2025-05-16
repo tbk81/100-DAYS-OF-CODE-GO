@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 
-	"github.com/tbk81/100-DAYS-OF-CODE-GO/00-tools/clearScreen"
 	"github.com/tbk81/100-DAYS-OF-CODE-GO/00-tools/randoGen"
 )
 
@@ -34,6 +33,13 @@ func checkHand(h []int) bool {
 	}
 }
 
+func playComp(h []int) []int {
+	if checkHand(h) == false && score(h) < 17 {
+		h = append(h, drawCard()[0])
+	}
+	return h
+}
+
 func main() {
 	var playerHand, computerHand []int
 	var usrChoice, hit string
@@ -47,7 +53,7 @@ Loop1:
 			fmt.Println("Start playing game")
 			playerHand = dealHand(2, deck)
 			computerHand = dealHand(2, deck)
-			fmt.Printf("Your cards: %v\nComputer's first card: %v\n", playerHand, computerHand[0])
+			fmt.Printf("Your cards: %v\tCurrent total: %v\nComputer's first card: %v\n", playerHand, score(playerHand), computerHand[0])
 		Loop2:
 			for {
 				fmt.Print("'h' to hit or 'p' to pass: ")
@@ -55,15 +61,18 @@ Loop1:
 				switch hit {
 				case "h":
 					playerHand = append(playerHand, drawCard()[0])
+					if playerHand[len(playerHand)-1] == 11 && checkHand(playerHand) {
+						playerHand[len(playerHand)-1] = 1
+					}
 					fmt.Printf("Your hand: %v\tCurrent total: %v\n", playerHand, score(playerHand))
 					fmt.Println("Computer's first card:", computerHand[0])
 					if checkHand(playerHand) {
 						fmt.Println("BUST! Computer wins")
 						break Loop2
 					}
-					//fmt.Println(checkHand(playerHand))
 				case "p":
-					clearScreen.Clear()
+					fmt.Println(playComp(computerHand))
+					// clearScreen.Clear()
 					break Loop2
 				}
 			}
