@@ -1,11 +1,11 @@
 package randoGen
 
+// This package generates a random slice of int with n length using any input slice
+
 import (
 	"math/rand"
 	"time"
 )
-
-// const symset = "!?@#$%^&*"
 
 var seededRand *rand.Rand = rand.New(
 	rand.NewSource(time.Now().UnixNano()))
