@@ -6,6 +6,14 @@ import (
 	// "github.com/tbk81/100-DAYS-OF-CODE-GO/00-tools/clearScreen"
 )
 
+func numChecker(g, n int) {
+	if g > n {
+		fmt.Println("Too high.")
+	} else if g < n {
+		fmt.Println("Too low.")
+	}
+}
+
 func main() {
 	var usrChoice string
 	var d, guess int
@@ -16,12 +24,34 @@ func main() {
 	fmt.Scanln(&usrChoice)
 	if usrChoice == "e" {
 		d = 10
-		fmt.Printf("You have %v attempts remaining to guess the number.\n", d)
-	} else {
+		for d > 0 {
+			fmt.Printf("You have %v attempts remaining to guess the number.\n", d)
+			fmt.Print("Make a guess: ")
+			fmt.Scanln(&guess)
+			if guess != num {
+				numChecker(guess, num)
+				fmt.Println("Try again.")
+				d -= 1
+			} else if guess == num {
+				fmt.Println("You win!")
+			}
+		}
+		fmt.Println("You ran out of guesses, you lose!")
+	} else if usrChoice == "h" {
 		d = 5
-		fmt.Printf("You have %v attempts remaining to guess the number.\n", d)
+		for d > 0 {
+			fmt.Printf("You have %v attempts remaining to guess the number.\n", d)
+			fmt.Print("Make a guess: ")
+			fmt.Scanln(&guess)
+			if guess != num {
+				numChecker(guess, num)
+				fmt.Println("Try again.")
+				d -= 1
+			} else if guess == num {
+				fmt.Println("You win!")
+			}
+		}
+		fmt.Println("You ran out of guesses, you lose!")
 	}
-	fmt.Print("Make a guess: ")
-	fmt.Scanln(&guess)
 	// clearScreen.Clear()
 }
