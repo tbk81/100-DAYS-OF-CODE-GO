@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	// "github.com/tbk81/100-DAYS-OF-CODE-GO/00-tools/clearScreen"
 )
 
 func numChecker(g, n int) {
@@ -32,11 +31,15 @@ func main() {
 				numChecker(guess, num)
 				fmt.Println("Try again.")
 				d -= 1
+				if d == 0 {
+					fmt.Println("You ran out of guesses, you lose!")
+					break
+				}
 			} else if guess == num {
 				fmt.Println("You win!")
+				break
 			}
 		}
-		fmt.Println("You ran out of guesses, you lose!")
 	} else if usrChoice == "h" {
 		d = 5
 		for d > 0 {
@@ -47,11 +50,14 @@ func main() {
 				numChecker(guess, num)
 				fmt.Println("Try again.")
 				d -= 1
+				if d == 0 {
+					fmt.Println("You ran out of guesses, you lose!")
+					break
+				}
 			} else if guess == num {
 				fmt.Println("You win!")
+				break
 			}
 		}
-		fmt.Println("You ran out of guesses, you lose!")
 	}
-	// clearScreen.Clear()
 }
