@@ -6,10 +6,10 @@ import (
 )
 
 type Person struct {
-	name           string `json:"name"`
-	follower_count int    `json:"follower_count"`
-	description    string `json:"description"`
-	country        string `json:"country"`
+	name           string //`json:"name"`
+	follower_count int    //`json:"follower_count"`
+	description    string //`json:"description"`
+	country        string //`json:"country"`
 }
 
 func main() {
