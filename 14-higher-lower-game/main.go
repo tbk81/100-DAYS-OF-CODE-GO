@@ -2,34 +2,37 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 )
 
 type Person struct {
-	name           string //`json:"name"`
-	follower_count int    //`json:"follower_count"`
-	description    string //`json:"description"`
-	country        string //`json:"country"`
+	Name           string `json:"name"`
+	Follower_count int    `json:"follower_count"`
+	Description    string `json:"description"`
+	Country        string `json:"country"`
+}
+
+type PeopleData struct {
+	Data []Person `json:"data"`
 }
 
 func main() {
-	// jFile, err := os.Open("game-data.json")
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-	// fmt.Println("Sucessfully opened game data")
-	// defer jFile.Close()
+	byteValue, err := os.ReadFile("game-data.json")
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+		return
+	}
 
-	byteValue, _ := os.ReadFile("game-data.json")
-	var people Person
-	json.Unmarshal(byteValue, &people)
+	var people PeopleData
+	err = json.Unmarshal(byteValue, &people)
+	if err != nil {
+		fmt.Println("Error unmarshaling JSON:", err)
+		return
+	}
 
-	// decoder := json.NewDecoder(jFile)
-	// for {
-	// 	var output Person
-	// 	if err := decoder.Decode(&output); err != nil {
-	// 		break
-	// 	}
-	// 	fmt.Printf("Processed: %+v\n", output)
-	// }
+	for _, person := range people.Data {
+		fmt.Printf("%s from %s has %d followers. Description: %s\n",
+			person.Name, person.Country, person.Follower_count, person.Description)
+	}
 }
