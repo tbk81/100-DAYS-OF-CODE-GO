@@ -37,15 +37,14 @@ func main() {
 
 	// for _, person := range people.Data {
 	// 	fmt.Printf("%s from %s has %d followers. Description: %s\n",
-	// 		person.Name, person.Country, person.Follower_count, person.Description)
+	// 		person.Name, person.Country, person.FollowerCount, person.Description)
 	// }
 
 	fmt.Println("Welcome to the higher/lower game!")
+	a := people.Data[rand.Intn(len(people.Data))]
+	b := people.Data[rand.Intn(len(people.Data))]
 Loop:
 	for {
-		a := people.Data[rand.Intn(len(people.Data))]
-		b := people.Data[rand.Intn(len(people.Data))]
-
 		fmt.Printf("\nCompare A: %v, a %v from %v\n", a.Name, a.Description, a.Country)
 		fmt.Println("VS")
 		fmt.Printf("Compare B: %v, a %v from %v\n", b.Name, b.Description, b.Country)
@@ -56,6 +55,7 @@ Loop:
 			if a.FollowerCount > b.FollowerCount {
 				score += 1
 				fmt.Println("You're right! Currnt score:", score)
+				b = people.Data[rand.Intn(len(people.Data))]
 			} else {
 				fmt.Println("That's incorrect, game over. Final score: ", score)
 				break Loop
@@ -64,11 +64,12 @@ Loop:
 			if b.FollowerCount > a.FollowerCount {
 				score += 1
 				fmt.Println("You're right! Currnt score:", score)
+				a = b
+				b = people.Data[rand.Intn(len(people.Data))]
 			} else {
 				fmt.Println("That's incorrect, game over. Final score: ", score)
 				break Loop
 			}
 		}
 	}
-
 }
