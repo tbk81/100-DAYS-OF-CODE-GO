@@ -42,10 +42,6 @@ func DeductResources(i Ingredients, m *Machine, cost float64) {
 	m.Money += cost
 }
 
-func Money() { // This is to take funds and check if correct amount has been entered
-	return
-}
-
 func main() {
 	var coffee MenuData
 	usrChoice := ""
